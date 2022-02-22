@@ -12,26 +12,26 @@ function FavList(props) {
 
 function App() {
   const info = data
-  const [id,setId] = useState(1)
+  const [id,setId] = useState(0)
   const user = info[id]
-  const [name,setName] = useState(`${user.name.first} ${user.name.last}`)
-  const [from,setFrom] = useState(`${user.city}, ${user.country}`)
-  const [employer,setEmployer] = useState(`${user.employer}`)
-  const [job, setJob] = useState(`${user.title}`)
-  const [favs,setFavs] = useState([user.favoriteMovies])
-
 
   return(
 <div>
 
   <div className='userInfo'>
-    <h1>{name}</h1>
-    <h3>From:{from}</h3>
-    <h3>Job Title:{job}</h3>
-    <h3>Employer:{employer}</h3>
+  <h3>{id+1}/{info.length}</h3>
+    <h1>{user.name.first} {user.name.last}</h1>
+    <div>
+    <h3>From:{user.city},{user.country}</h3>
+    <h3>Job Title:{user.title}</h3>
+    <h3>Employer:{user.employer}</h3>
+    </div>
     <h2>Favorite Movies</h2>
-    <FavList fav={favs} />
-    
+    <FavList fav={user.favoriteMovies} />
+    <div>
+    <button onClick={()=> setId(id-1)}> Previous </button>
+    <button onClick={()=> setId(id+1)}> Next </button>
+    </div>
   </div>
 </div>
   )
