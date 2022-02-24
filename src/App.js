@@ -9,9 +9,12 @@ function FavList(props) {
 }
 
 function App() {
+  const [count,setCount] = useState(0)
   const [id,setId] = useState(0)
   const user = data[id]
-
+  const remove = ()=>{data.splice(id,1)
+  setCount(count+1)}
+  
   return(
 <div className='body'>
 <div className='header'>
@@ -34,7 +37,7 @@ function App() {
     <div className='nav'>
       <button className='moveBtn' onClick={()=> setId(id-1)}>  Previous </button>
       <button>Edit</button>
-      <button onClick={()=>data.splice(id,1)}>Delete</button>
+      <button onClick={remove}>Delete</button>
       <button>New</button>
       <button className='moveBtn' onClick={()=> setId(id+1)}>  Next  </button>
     </div>
