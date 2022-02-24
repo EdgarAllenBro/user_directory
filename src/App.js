@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './App.css';
 import data from './data'
 
@@ -8,18 +8,17 @@ function FavList(props) {
   return <ol>{favList}</ol>
 }
 
-
-
 function App() {
-  const info = data
   const [id,setId] = useState(0)
-  const user = info[id]
+  const user = data[id]
 
   return(
-<div>
-
+<div className='body'>
+<div className='header'>
+  <h3>Home</h3>
+</div>
   <div className='userInfo'>
-  <h3>{id+1}/{info.length}</h3>
+  <h3>{id+1}/{data.length}</h3>
     <h1>{user.name.first} {user.name.last}</h1>
     <div>
     <h3>From:{user.city},{user.country}</h3>
@@ -27,12 +26,19 @@ function App() {
     <h3>Employer:{user.employer}</h3>
     </div>
     <h2>Favorite Movies</h2>
+    <div className='favlist'>
     <FavList fav={user.favoriteMovies} />
-    <div>
-    <button onClick={()=> setId(id-1)}> Previous </button>
-    <button onClick={()=> setId(id+1)}> Next </button>
     </div>
-  </div>
+    </div>
+
+    <div className='nav'>
+      <button className='moveBtn' onClick={()=> setId(id-1)}>  Previous </button>
+      <button>Edit</button>
+      <button onClick={()=>data.splice(id,1)}>Delete</button>
+      <button>New</button>
+      <button className='moveBtn' onClick={()=> setId(id+1)}>  Next  </button>
+    </div>
+  
 </div>
   )
 }
